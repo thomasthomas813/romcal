@@ -1,14 +1,14 @@
 module.exports = {
-  root: true,
   env: {
     browser: false,
     es6: true,
     node: true,
   },
   parserOptions: {
-    project: 'tsconfig.base.json',
+    project: '../../tsconfig.base.json',
     sourceType: 'module',
   },
+  ignorePatterns: ['node_modules', 'dist', 'coverage', 'tmp', '__snapshots__', '*.js', '*.json'],
   extends: [
     'airbnb-base',
     // although this is typescript, it has to be here to have it's imported rules configured for
@@ -42,7 +42,7 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['tests/**', 'scripts/**'],
+        devDependencies: ['__tests__/**', 'build/**'],
       },
     ],
     'import/prefer-default-export': 'off',
@@ -71,7 +71,7 @@ module.exports = {
   // override specific to test files
   overrides: [
     {
-      files: ['scripts/**/*.ts', 'src/**/*.ts', '__tests__/**/*.ts'],
+      files: ['build/**/*.ts', 'src/**/*.ts', '__tests__/**/*.ts'],
       parser: '@typescript-eslint/parser',
       plugins: ['@typescript-eslint'],
       rules: {
@@ -107,9 +107,9 @@ module.exports = {
       // i know the nesting is weird, but this keeps all the tests inheriting ts base configs
       overrides: [
         {
-          files: ['scripts/**/*.ts', 'src/types/**/*.ts', 'src/utils/**/*.ts', 'src/constants/**/*.ts'],
+          files: ['build/**/*.ts', 'src/types/**/*.ts', 'src/utils/**/*.ts', 'src/constants/**/*.ts'],
           rules: {
-            // scripts don't export, and utils are always needed!
+            // build scripts don't export, and utils are always needed!
             // turn this off to see if there's anything unused worth removing
             'import/no-unused-modules': 'off',
             'no-console': 'off',
@@ -132,12 +132,17 @@ module.exports = {
           },
         },
         {
-          files: ['tests/**/*.ts', '**/*.spec.ts'],
+          files: ['__tests__/**/*.ts', '**/*.spec.ts'],
           extends: ['plugin:jest/recommended'],
           plugins: ['jest'],
           rules: {
+            '@typescript-eslint/no-non-null-assertion': 'off',
+
             // tests don't export
             'import/no-unused-modules': 'off',
+
+            // do not complain about importing dist localized calendars
+            'import/no-relative-packages': 'off',
           },
         },
       ],

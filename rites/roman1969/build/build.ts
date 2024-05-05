@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/no-unused-modules */
 import path, { dirname, resolve } from 'node:path';
 import fs from 'fs';
 
