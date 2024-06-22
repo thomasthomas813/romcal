@@ -1,0 +1,54 @@
+{
+  "name": "@romcal/rite-roman1969",
+  "version": "0.0.0",
+  "description": "Liturgical calendar for the Roman Rite according to the 1969 reform",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/esm/romcal.js",
+    "require": "./dist/cjs/romcal.js"
+  },
+  "main": "dist/cjs/romcal.js",
+  "module": "dist/esm/romcal.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "node -r ts-node/register build/build.ts",
+    "clean": "rimraf coverage dist tmp",
+    "data:checks": "node -r ts-node/register build/data-checks.ts",
+    "doc": "node -r ts-node/register build/bundle-doc.ts",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky",
+    "prettier": "prettier -c .",
+    "prettier:fix": "prettier -w .",
+    "test": "TZ=UTC jest --coverage",
+    "test:snapshot:update": "TZ=UTC jest -u",
+    "test:watch": "TZ=UTC jest --watch",
+    "test:without-coverage": "TZ=UTC jest"
+  },
+  "dependencies": {
+    "@romcal/easter": "file:../../packages/easter",
+    "i18next": "^21.6.0",
+    "ts-deepmerge": "^7.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@commitlint/types": "^19.0.3",
+    "@jsdevtools/npm-publish": "^3.1.1",
+    "@romcal/config": "file:../../packages/config",
+    "@types/cli-progress": "^3.11.5",
+    "@types/humanize-duration": "^3.27.4",
+    "@types/jest": "^29.5.12",
+    "@types/node": "~20.14.2",
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "commitlint-plugin-selective-scope": "^1.0.1",
+    "dts-bundle-generator": "^9.3.1",
+    "esbuild": "~0.21.4",
+    "esbuild-jest": "~0.5.0",
+    "glob": "^10.3.10",
+    "humanize-duration": "^3.31.0",
+    "type-fest": "^4.10.3"
+  },
+  "license": "MIT"
+}
